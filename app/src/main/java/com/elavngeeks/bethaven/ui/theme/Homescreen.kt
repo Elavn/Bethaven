@@ -1,6 +1,7 @@
 package com.elavngeeks.bethaven.ui.theme
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,6 +37,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.elavngeeks.bethaven.R
+import com.elavngeeks.bethaven.ui.theme.UI.NavbarContents
 import com.elavngeeks.bethaven.ui.theme.UI.backgroundColour
 import com.elavngeeks.bethaven.ui.theme.UI.bet9jaColor
 import com.elavngeeks.bethaven.ui.theme.UI.betkingColor
@@ -116,7 +122,86 @@ fun HomeScreen() {
                 )
             )
 
+            BottomNavigation(items = listOf(
+                NavbarContents(R.drawable.home, "Home"),
+                NavbarContents(R.drawable.exclusives, "Exclusives"),
+
+                ))
+
         }
+    }
+}
+
+@Composable
+fun BottomNavigation(
+    items: List<NavbarContents>,
+    modifier: Modifier = Modifier,
+    activeHighlightColor: Color = betkingColor,
+    activeTextColor: Color = betkingColor,
+    inactiveTextColor: Color = Color.Black,
+    initialSelectedItemIndex: Int = 0
+) {
+    var selectedItemIndex by remember {
+        mutableStateOf(initialSelectedItemIndex)
+    }
+    Row(
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier
+            .fillMaxWidth()
+            .background(Color.White)
+            .padding(15.dp)
+    ) {
+        items.forEachIndexed { index, item ->
+            BottomNavContents(
+                item = item,
+                isSelected = index == selectedItemIndex,
+                activeHighlightColor = activeHighlightColor,
+                activeTextColor = activeTextColor,
+                inactiveTextColor = inactiveTextColor
+            ) {
+                selectedItemIndex = index
+            }
+        }
+    }
+
+}
+
+@Composable
+fun BottomNavContents(
+    item: NavbarContents,
+    isSelected: Boolean = false,
+    activeHighlightColor: Color = betkingColor,
+    activeTextColor: Color = betkingColor,
+    inactiveTextColor: Color = Color.Black,
+    onItemClick: () -> Unit
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier.clickable {
+            onItemClick()
+        }
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .clip(RoundedCornerShape(10.dp))
+                .background(if (isSelected) activeHighlightColor else Color.Transparent)
+                .padding(10.dp)
+        ) {
+            Icon(
+                painter = painterResource(id = item.navIcon),
+                contentDescription = item.iconNames,
+                tint = if(isSelected) activeTextColor else inactiveTextColor,
+                modifier = Modifier.size(20.dp)
+            )
+        }
+        Text(
+            text = item.iconNames,
+            fontFamily = interregular,
+            color = if(isSelected) activeTextColor else inactiveTextColor
+        )
     }
 }
 
@@ -125,13 +210,13 @@ fun GreetingSection(){
     Box(
     ) {
         Text(
-            text = "Welcome!",
-            fontSize = 28.sp,
-            fontFamily = epilogueregular,
+            text = "BetHaven",
+            fontSize = 18.sp,
+            fontFamily = epiloguebold,
             modifier = Modifier
-                .padding(top = 10.dp)
+                .padding(top = 10.dp, start = 18.dp)
                 .fillMaxWidth(),
-            textAlign = TextAlign.Center,
+            textAlign = TextAlign.Start,
             color = textColour2
 
         )
@@ -150,7 +235,7 @@ fun BetCards(betCards: List<Bettingcards>) {
             fontFamily = intersbold,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 3.dp, start = 14.dp),
+                .padding(start = 14.dp),
             color = textColour2
         )
 
@@ -178,7 +263,7 @@ fun CardsItem(
             .padding(7.5.dp)
             .clip(RoundedCornerShape(25.dp))
             .width(260.dp)
-            .height(360.dp)
+            .height(320.dp)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -193,12 +278,12 @@ fun CardsItem(
                 contentDescription = "",
                 tint = Color.Unspecified,
                 modifier = Modifier
-                    .padding(top = 15.dp)
+                    .padding(top = 18.dp)
             )
 
             Text(
                 text = cardsitem.bookielink,
-                fontSize = 28.sp,
+                fontSize = 24.sp,
                 color = backgroundColour,
                 fontFamily = interregular,
                 modifier = Modifier
@@ -207,7 +292,7 @@ fun CardsItem(
 
             Text(
                 text = cardsitem.bookietag,
-                fontSize = 20.sp,
+                fontSize = 16.sp,
                 color = backgroundColour,
                 textAlign = TextAlign.Center,
                 fontFamily = interregular,
@@ -246,7 +331,7 @@ fun CardsItem(
 fun MoreBookies(features: List<Otherbookies>) {
     Column(
         modifier = Modifier
-            .padding(top = 18.dp)
+            .padding(top = 10.dp)
     ) {
         Text(
             text = "More available bookies",
@@ -254,7 +339,7 @@ fun MoreBookies(features: List<Otherbookies>) {
             fontFamily = intersbold,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 10.dp, start = 14.dp),
+                .padding(bottom = 10.dp, start = 18.dp),
             color = textColour2
         )
 
@@ -263,7 +348,7 @@ fun MoreBookies(features: List<Otherbookies>) {
             contentPadding = PaddingValues(start = 7.5.dp, end = 7.5.dp, bottom = 10.dp),
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp)
-                .fillMaxHeight()
+                .fillMaxHeight(0.9f)
                 .shadow(elevation = 4.dp, spotColor = Color(0x40000000), ambientColor = Color(0x40000000))
                 .background(color = Color(0xFFFFFFFF), shape = RoundedCornerShape(size = 25.dp))
         ) {
