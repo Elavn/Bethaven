@@ -13,6 +13,11 @@
         android:theme="@style/Theme.Bethaven"
         tools:targetApi="31">
         <activity
+            android:name=".ui.theme.UI.ExclusiveScreen"
+            android:exported="false"
+            android:label="@string/title_activity_exclusive_screen"
+            android:theme="@style/Theme.Bethaven" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

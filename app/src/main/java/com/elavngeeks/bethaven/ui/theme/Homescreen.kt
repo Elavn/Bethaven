@@ -121,14 +121,12 @@ fun HomeScreen() {
                     )
                 )
             )
-
-            BottomNavigation(items = listOf(
-                NavbarContents(R.drawable.home, "Home"),
-                NavbarContents(R.drawable.exclusives, "Exclusives"),
-
-                ))
-
         }
+
+        BottomNavigation(items = listOf(
+            NavbarContents(R.drawable.home, "Home"),
+            NavbarContents(R.drawable.exclusives, "Exclusives"),
+        ), modifier = Modifier.align(Alignment.BottomCenter))
     }
 }
 
@@ -187,14 +185,12 @@ fun BottomNavContents(
             contentAlignment = Alignment.Center,
             modifier = Modifier
                 .clip(RoundedCornerShape(10.dp))
-                .background(if (isSelected) activeHighlightColor else Color.Transparent)
-                .padding(10.dp)
         ) {
             Icon(
                 painter = painterResource(id = item.navIcon),
                 contentDescription = item.iconNames,
-                tint = if(isSelected) activeTextColor else inactiveTextColor,
-                modifier = Modifier.size(20.dp)
+                tint = if(isSelected) activeHighlightColor else inactiveTextColor,
+                modifier = Modifier.size(30.dp)
             )
         }
         Text(
@@ -207,8 +203,7 @@ fun BottomNavContents(
 
 @Composable
 fun GreetingSection(){
-    Box(
-    ) {
+    Box{
         Text(
             text = "BetHaven",
             fontSize = 18.sp,
@@ -242,7 +237,7 @@ fun BetCards(betCards: List<Bettingcards>) {
         LazyRow(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 7.dp, start = 7.dp,)
+                .padding(top = 7.dp, start = 7.dp)
 
         ) {
             items(
@@ -345,7 +340,7 @@ fun MoreBookies(features: List<Otherbookies>) {
 
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
-            contentPadding = PaddingValues(start = 7.5.dp, end = 7.5.dp, bottom = 10.dp),
+            contentPadding = PaddingValues(start = 7.5.dp, end = 7.5.dp, bottom = 5.dp),
             modifier = Modifier
                 .padding(start = 16.dp, end = 16.dp)
                 .fillMaxHeight(0.9f)
@@ -375,7 +370,7 @@ fun BookiesItem(bookiesitem: Otherbookies) {
                 contentDescription = "",
                 tint = Color.Unspecified,
                 modifier = Modifier
-                    .padding(bottom = 8.dp, top = 10.dp)
+                    .padding(bottom = 5.dp, top = 10.dp)
             )
 
             Text(

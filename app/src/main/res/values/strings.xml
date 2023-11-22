@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Bethaven</string>
+    <string name="title_activity_exclusive_screen">ExclusiveScreen</string>
 </resources>
