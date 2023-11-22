@@ -21,4 +21,4 @@ Click on the desired company to view its webpage within the app.
 
 
 Contributing:
-We welcome contributions to improve Bethaven! To contribute:
+We welcome contributions to improve Bethaven!
