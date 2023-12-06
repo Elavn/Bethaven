@@ -302,11 +302,7 @@ fun extraCards(){
         extraCard(extraData = card4)
 
     }
-
 }
-
-
-
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
