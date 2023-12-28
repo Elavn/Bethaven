@@ -57,7 +57,7 @@ fun ResponsibleGamblingScreen(){
     Box(
         modifier = Modifier
             .background(backgroundColour)
-            .fillMaxHeight()
+            .fillMaxSize()
     ) {
         Column {
             TopSection()
@@ -148,7 +148,6 @@ fun DropDowns(
     title: String,
     @DrawableRes arrow: Int,
     details: String,
-    modifier: Modifier = Modifier
 ) {
     var expanded by remember { mutableStateOf(false) }
 
