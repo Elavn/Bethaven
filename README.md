@@ -1,4 +1,5 @@
 Bethaven - Sports Betting Company Webpage Viewer
+
 Bethaven is an application designed to conveniently display webpages of popular sports betting companies in Nigeria.
 
 
@@ -10,8 +11,9 @@ Features:
 Centralized Access: Access multiple sports betting company webpages from a single application.
 Convenience: Streamlined interface for easy navigation between different platforms.
 Quick View: Instant access to popular betting sites without searching or typing URLs.
+
 Installation
-To install and run Bethaven locally:
+To install and run Bethaven locally: 
 
 
 Usage:
